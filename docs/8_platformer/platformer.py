@@ -6,16 +6,16 @@ import os
 
 
 class Player(pygame.sprite.Sprite):
-    '''
+    """
     Spawn a player
-    '''
+    """
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.images = []
         # img = pygame.image.load(os.path.join('images', 'player1.png')).convert()
-        img = pygame.image.load('images/player1.png')
-        
+        img = pygame.image.load("images/player1.png")
+
         self.images.append(img)
         self.image = self.images[0]
         self.rect = self.image.get_rect()
@@ -23,30 +23,30 @@ class Player(pygame.sprite.Sprite):
 
 w, h = 640, 480
 
-fps   = 40  # frame rate
-ani   = 4   # animation cycles
+fps = 40  # frame rate
+ani = 4  # animation cycles
 
 pygame.init()
 clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((w, h))
-backdrop = pygame.image.load(os.path.join('images', 'fall.jpg')).convert()
-backdrop = pygame.image.load('images/fall.jpg')
+backdrop = pygame.image.load(os.path.join("images", "fall.jpg")).convert()
+backdrop = pygame.image.load("images/fall.jpg")
 backdrop.convert()
 
 backdropbox = screen.get_rect()
 
 
-player = Player()   # spawn player
-player.rect.x = 0   # go to x
-player.rect.y = 0   # go to y
+player = Player()  # spawn player
+player.rect.x = 0  # go to x
+player.rect.y = 0  # go to y
 player_list = pygame.sprite.Group()
 player_list.add(player)
 running = True
 
-'''
+"""
 Main loop
-'''
+"""
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

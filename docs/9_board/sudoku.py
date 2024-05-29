@@ -27,20 +27,20 @@ sudoku2 = """
 .....1..4
 """
 
+
 class Demo(App):
     def __init__(self):
         super().__init__()
 
-        Scene(caption='Sudoku')
+        Scene(caption="Sudoku")
         s = Sudoku(dx=20, dy=20)
         s.set_Num(sudoku1)
         s.render()
 
-        Button('Reset', dir=(1, 0), cmd='print(123)')
+        Button("Reset", dir=(1, 0), cmd="print(123)")
         # s2 = Sudoku(dir=(1, 0))
         # s2.set_Num(sudoku2)
 
-        
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     Demo().run()

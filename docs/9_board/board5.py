@@ -5,8 +5,10 @@ import numpy as np
 from pygame.locals import *
 from pygamelib import *
 
+
 class Puzzle(Board):
     """Create a 4x4 number puzzle."""
+
     def __init__(self, n, m, **kwargs):
         super(Puzzle, self).__init__(n, m, **kwargs)
         a = np.arange(n * m)
@@ -14,7 +16,7 @@ class Puzzle(Board):
         self.T = a
 
     def on_key(self, event):
-        d = {K_LEFT:0, K_RIGHT:0, K_UP:0, K_DOWN:0}
+        d = {K_LEFT: 0, K_RIGHT: 0, K_UP: 0, K_DOWN: 0}
         if event.key in d:
             i, j = self.find(0)
             if event.key == K_LEFT:
@@ -28,13 +30,16 @@ class Puzzle(Board):
                 if self.T[i, j] == n:
                     return (i, j)
 
+
 class BoardDemo(App):
     """Draw a 4x4 number puzzle."""
+
     def __init__(self):
         super(BoardDemo, self).__init__()
-        Text('Number puzzle')
+        Text("Number puzzle")
 
         Puzzle(4, 5, pos=(300, 20))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     BoardDemo().run()

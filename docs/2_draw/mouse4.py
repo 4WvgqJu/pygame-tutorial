@@ -33,9 +33,9 @@ while running:
 
         elif event.type == MOUSEMOTION and drawing:
             points[-1] = event.pos
-    
+
     screen.fill(GRAY)
-    if len(points)>1:
+    if len(points) > 1:
         rect = pygame.draw.lines(screen, RED, True, points, 3)
         pygame.draw.rect(screen, GREEN, rect, 1)
     pygame.display.update()

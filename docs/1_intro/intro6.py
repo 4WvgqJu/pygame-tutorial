@@ -16,7 +16,7 @@ speed = [2, 2]
 
 while running:
     for event in pygame.event.get():
-        if event.type == QUIT: 
+        if event.type == QUIT:
             running = False
 
     rect = rect.move(speed)

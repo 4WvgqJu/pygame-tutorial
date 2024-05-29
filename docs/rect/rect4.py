@@ -7,7 +7,7 @@ while running:
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
-        
+
         if event.type == KEYDOWN:
             if event.key in dir:
                 v = dir[event.key]

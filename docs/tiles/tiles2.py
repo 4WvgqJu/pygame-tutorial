@@ -2,7 +2,7 @@ import pygame, os
 from pygame.locals import *
 import numpy as np
 
-file = 'tmw_desert_spacing.png'
+file = "tmw_desert_spacing.png"
 
 print(__file__)
 path = os.path.abspath(__file__)
@@ -13,6 +13,7 @@ print(base)
 
 root, ext = os.path.splitext(path)
 print(root)
+
 
 class Tileset:
     def __init__(self, file, size=(32, 32), margin=1, spacing=1):
@@ -25,7 +26,6 @@ class Tileset:
         self.tiles = []
         self.load()
 
-
     def load(self):
 
         self.tiles = []
@@ -33,7 +33,7 @@ class Tileset:
         w, h = self.rect.size
         dx = self.size[0] + self.spacing
         dy = self.size[1] + self.spacing
-        
+
         for x in range(x0, w, dx):
             for y in range(y0, h, dy):
                 tile = pygame.Surface(self.size)
@@ -41,7 +41,7 @@ class Tileset:
                 self.tiles.append(tile)
 
     def __str__(self):
-        return f'{self.__class__.__name__} file:{self.file} tile:{self.size}'
+        return f"{self.__class__.__name__} file:{self.file} tile:{self.size}"
 
 
 class Tilemap:
@@ -51,7 +51,7 @@ class Tilemap:
         self.map = np.zeros(size, dtype=int)
 
         h, w = self.size
-        self.image = pygame.Surface((32*w, 32*h))
+        self.image = pygame.Surface((32 * w, 32 * h))
         if rect:
             self.rect = pygame.Rect(rect)
         else:
@@ -62,7 +62,7 @@ class Tilemap:
         for i in range(m):
             for j in range(n):
                 tile = self.tileset.tiles[self.map[i, j]]
-                self.image.blit(tile, (j*32, i*32))
+                self.image.blit(tile, (j * 32, i * 32))
 
     def set_zero(self):
         self.map = np.zeros(self.size, dtype=int)
@@ -77,7 +77,7 @@ class Tilemap:
         self.render()
 
     def __str__(self):
-        return f'{self.__class__.__name__} {self.size}'      
+        return f"{self.__class__.__name__} {self.size}"
 
 
 class Game:
@@ -88,7 +88,7 @@ class Game:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode(Game.SIZE)
-        pygame.display.set_caption('Pygame Tile Demo')
+        pygame.display.set_caption("Pygame Tile Demo")
         self.running = True
 
         self.tileset = Tileset(file)
@@ -110,11 +110,10 @@ class Game:
                         self.tilemap.set_zero()
                     elif event.key == K_s:
                         self.save_image()
-                        
 
             self.screen.blit(self.tilemap.image, self.tilemap.rect)
             pygame.display.update()
-            
+
         pygame.quit()
 
     def save_image(self):
@@ -123,7 +122,8 @@ class Game:
         path = os.path.abspath(__file__)
         head, tail = os.path.split(path)
         root, ext = os.path.splitext(path)
-        pygame.image.save(self.screen, root + '.png')
+        pygame.image.save(self.screen, root + ".png")
+
 
 game = Game()
 game.run()

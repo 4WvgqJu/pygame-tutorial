@@ -1,10 +1,11 @@
 from app import *
 
+
 class Demo(App):
     def __init__(self):
         super().__init__()
-        
-        Scene(caption='Nodes - vertical placement')
+
+        Scene(caption="Nodes - vertical placement")
         Node()
         Node()
         Node()
@@ -13,19 +14,20 @@ class Demo(App):
         Node()
         Node()
 
-        Scene(caption='Nodes - horizontal placement')
+        Scene(caption="Nodes - horizontal placement")
         Node(dir=(1, 0), gap=(0, 0))
         Node()
         Node()
 
-        Node(pos=(20, 100)
+        Node(pos=(20, 100))
         Node()
         Node()
 
-        Scene(caption='Nodes - diagonal placement')
+        Scene(caption="Nodes - diagonal placement")
         Node(dir=(1, 1), gap=(0, 0))
         Node()
         Node()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     Demo().run()

@@ -13,9 +13,9 @@ w, h = 640, 240
 screen = pygame.display.set_mode((w, h))
 running = True
 
-module = sys.modules['__main__']
+module = sys.modules["__main__"]
 path, name = os.path.split(module.__file__)
-path = os.path.join(path, 'bird.png')
+path = os.path.join(path, "bird.png")
 
 img0 = pygame.image.load(path)
 img0.convert()
@@ -24,7 +24,7 @@ img0.convert()
 rect0 = img0.get_rect()
 pygame.draw.rect(img0, GREEN, rect0, 1)
 
-center = w//2, h//2
+center = w // 2, h // 2
 img = img0
 rect = img.get_rect()
 rect.center = center
@@ -61,7 +61,7 @@ while running:
 
             elif event.key == K_h:
                 img = pygame.transform.flip(img, True, False)
-            
+
             elif event.key == K_v:
                 img = pygame.transform.flip(img, False, True)
 
@@ -78,14 +78,14 @@ while running:
             mouse = event.pos
             x = mouse[0] - center[0]
             y = mouse[1] - center[1]
-            d = math.sqrt(x ** 2 + y ** 2)
+            d = math.sqrt(x**2 + y**2)
 
             angle = math.degrees(-math.atan2(y, x))
             scale = abs(5 * d / w)
             img = pygame.transform.rotozoom(img0, angle, scale)
             rect = img.get_rect()
             rect.center = center
-    
+
     screen.fill(GRAY)
     screen.blit(img, rect)
     pygame.draw.rect(screen, RED, rect, 1)

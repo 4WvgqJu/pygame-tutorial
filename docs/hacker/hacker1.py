@@ -2,10 +2,12 @@
 
 from pglib import *
 
+
 class Demo(App):
     Scene()
-    Text('text')
+    Text("text")
     Node()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     Demo().run()

@@ -1,7 +1,8 @@
 import pygame
 from pygame.locals import *
 
-file = 'tmw_desert_spacing.png'
+file = "tmw_desert_spacing.png"
+
 
 class Game:
     W = 640
@@ -32,9 +33,10 @@ class Game:
         self.rect = self.image.get_rect()
 
         self.screen = pygame.display.set_mode(self.rect.size)
-        pygame.display.set_caption(f'size:{self.rect.size}')
+        pygame.display.set_caption(f"size:{self.rect.size}")
         self.screen.blit(self.image, self.rect)
         pygame.display.update()
+
 
 game = Game()
 game.run()

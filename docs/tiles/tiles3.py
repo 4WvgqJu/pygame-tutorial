@@ -8,27 +8,36 @@ from tkinter import filedialog
 root = tk.Tk()
 root.withdraw()
 
-file = 'tmw_desert_spacing.png'
+file = "tmw_desert_spacing.png"
+
 
 class Editor(pygame.sprite.Sprite):
     # Create an image editor
     group = pygame.sprite.Group()
-    color_dict = {'r':'red', 'g':'green', 'b':'blue',
-    'y':'yellow', 'c':'cyan', 'm':'magenta', 'w':'white', 'k':'black'}
+    color_dict = {
+        "r": "red",
+        "g": "green",
+        "b": "blue",
+        "y": "yellow",
+        "c": "cyan",
+        "m": "magenta",
+        "w": "white",
+        "k": "black",
+    }
 
     def __init__(self, rect=None):
         super().__init__()
         self.image = pygame.Surface((200, 100))
-        self.bg = 'gray'
+        self.bg = "gray"
         self.image.fill(self.bg)
         if rect:
             self.rect = pygame.Rect(rect)
         else:
             self.rect = self.image.get_rect()
-        
+
         self.drawing = False
         self.p0 = (0, 0)
-        self.color = 'black'
+        self.color = "black"
         print(pygame.Color(self.color))
 
         self.stroke = 1
@@ -36,12 +45,12 @@ class Editor(pygame.sprite.Sprite):
 
     def do(self, event):
         if event.type == KEYDOWN:
-            if event.unicode in 'rbgycmwk':
+            if event.unicode in "rbgycmwk":
                 self.color = self.color_dict[event.unicode]
                 print(self.color)
-            elif event.unicode in '123456789':
+            elif event.unicode in "123456789":
                 self.stroke = int(event.unicode)
-                print('stroke', self.stroke)
+                print("stroke", self.stroke)
             elif event.key == K_o:
                 path = filedialog.askopenfilename()
                 print(path)
@@ -50,8 +59,7 @@ class Editor(pygame.sprite.Sprite):
 
             elif event.key == K_s:
                 path = filedialog.askopenfilename(initialdir=".")
-                self.image.save('xxx.png')
-
+                self.image.save("xxx.png")
 
         elif event.type == MOUSEBUTTONDOWN:
             self.p0 = event.pos
@@ -64,7 +72,6 @@ class Editor(pygame.sprite.Sprite):
             self.p0 = p1
         elif event.type == MOUSEBUTTONUP:
             self.drawing = False
-
 
 
 class Text(pygame.sprite.Sprite):
@@ -87,6 +94,7 @@ class Text(pygame.sprite.Sprite):
     def draw(self):
         screen.blit(self.image, self.pos)
 
+
 class Tileset:
     def __init__(self, file, size=(32, 32), margin=1, spacing=1):
         self.file = file
@@ -105,7 +113,7 @@ class Tileset:
         w, h = self.rect.size
         dx = self.size[0] + self.spacing
         dy = self.size[1] + self.spacing
-        
+
         for x in range(x0, w, dx):
             for y in range(y0, h, dy):
                 tile = pygame.Surface(self.size)
@@ -113,7 +121,7 @@ class Tileset:
                 self.tiles.append(tile)
 
     def __str__(self):
-        return f'{self.__class__.__name__} file:{self.file} tile:{self.size}'
+        return f"{self.__class__.__name__} file:{self.file} tile:{self.size}"
 
 
 class Tilemap:
@@ -123,7 +131,7 @@ class Tilemap:
         self.map = np.zeros(size, dtype=int)
 
         h, w = self.size
-        self.image = pygame.Surface((32*w, 32*h))
+        self.image = pygame.Surface((32 * w, 32 * h))
         if rect:
             self.rect = pygame.Rect(rect)
         else:
@@ -139,7 +147,7 @@ class Tilemap:
         for i in range(m):
             for j in range(n):
                 tile = self.tileset.tiles[self.map[i, j]]
-                self.image.blit(tile, (j*32, i*32))
+                self.image.blit(tile, (j * 32, i * 32))
 
     def set_zero(self):
         self.map = np.zeros(self.size, dtype=int)
@@ -151,7 +159,7 @@ class Tilemap:
         self.render()
 
     def __str__(self):
-        return f'{self.__class__.__name__} {self.size}'      
+        return f"{self.__class__.__name__} {self.size}"
 
 
 class App:
@@ -162,8 +170,8 @@ class App:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode(App.SIZE)
-        self.screen.fill('black')
-        pygame.display.set_caption('Pygame Tile Demo')
+        self.screen.fill("black")
+        pygame.display.set_caption("Pygame Tile Demo")
         pygame.display.update()
 
         self.running = True
@@ -171,7 +179,7 @@ class App:
         self.tileset = Tileset(file)
         self.tilemap = Tilemap(self.tileset, rect=(50, 50, 500, 300))
         self.tilemap.set_random()
-        self.label = Text('Tile demo') 
+        self.label = Text("Tile demo")
 
         self.img_editor1 = Editor()
         self.img_editor2 = Editor((100, 500, 200, 100))
@@ -194,13 +202,13 @@ class App:
 
                 self.tilemap.do(event)
                 self.img_editor1.do(event)
-                        
+
             self.screen.blit(self.tilemap.image, self.tilemap.rect)
-            
+
             Text.group.draw(self.screen)
             Editor.group.draw(self.screen)
             pygame.display.update()
-            
+
         pygame.quit()
 
     def save_image(self):
@@ -209,7 +217,8 @@ class App:
         path = os.path.abspath(__file__)
         head, tail = os.path.split(path)
         root, ext = os.path.splitext(path)
-        pygame.image.save(self.screen, root + '.png')
+        pygame.image.save(self.screen, root + ".png")
+
 
 app = App()
 app.run()

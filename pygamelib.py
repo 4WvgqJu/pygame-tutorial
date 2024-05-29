@@ -19,39 +19,40 @@ LIGHTGRAY = (240, 240, 240)
 
 
 colors = {
-    'black':BLACK, 
-    'red':RED, 
-    'green':GREEN, 
-    'blue':BLUE, 
-    'yellow':YELLOW,
-    'cyan':CYAN,
-    'magenta':MAGENTA,
-    'white':WHITE,
+    "black": BLACK,
+    "red": RED,
+    "green": GREEN,
+    "blue": BLUE,
+    "yellow": YELLOW,
+    "cyan": CYAN,
+    "magenta": MAGENTA,
+    "white": WHITE,
 }
 
 
 class Shape:
     """Base class for geometric shapes objects to place in the game.
-    Shapes have the following attributes: 
+    Shapes have the following attributes:
 
     * size
     * color
     * thickness
-    * position, speed, 
+    * position, speed,
     * friction, gravity
     """
-    pos = [20, 20]   # default position
-    size = [100, 40] # default size
-    gap = 2          # defalut gap
-    color = GREEN    # default color
-    d = 0            # default thickness
-    v = [0, 0]       # default speed
+
+    pos = [20, 20]  # default position
+    size = [100, 40]  # default size
+    gap = 2  # defalut gap
+    color = GREEN  # default color
+    d = 0  # default thickness
+    v = [0, 0]  # default speed
     selection_color = BLUE
     selection_d = 2
 
     def __init__(self, pos=None, size=None, color=None, d=None, v=None):
         """Define the object attributes from the arguments and class defaults."""
-        
+
         if pos != None:
             Shape.pos = list(pos)
         self.pos = Shape.pos[:]
@@ -60,7 +61,7 @@ class Shape:
             Shape.size = list(size)
         self.size = Shape.size[:]
         Shape.pos[1] += Shape.size[1] + Shape.gap
-        
+
         if color != None:
             Shape.color = color
         self.color = Shape.color
@@ -75,7 +76,7 @@ class Shape:
 
         self.rect = Rect(self.pos, self.size)
         self.is_active = False
-        self.cmd = ''
+        self.cmd = ""
         App.objects.append(self)
 
     def draw(self):
@@ -91,7 +92,7 @@ class Shape:
         """Handle a key press event."""
         if self.is_active:
             if pygame.key.get_mods() & KMOD_META:
-                d = {K_UP:(0, -1), K_DOWN:(0, 1), K_LEFT:(-1, 1), K_RIGHT:(1, 0)}
+                d = {K_UP: (0, -1), K_DOWN: (0, 1), K_LEFT: (-1, 1), K_RIGHT: (1, 0)}
                 if event.key in d:
                     dv = d[event.key]
                     self.v[0] += dv[0]
@@ -109,24 +110,27 @@ class Shape:
         """Update the position of the object."""
         self.pos[0] += self.v[0]
         self.pos[1] += self.v[1]
-        if not 0 < self.pos[0] < App.w-self.rect.w:
+        if not 0 < self.pos[0] < App.w - self.rect.w:
             self.v[0] *= -1
-        if not 0 < self.pos[1] < App.h-self.rect.h:
+        if not 0 < self.pos[1] < App.h - self.rect.h:
             self.v[1] *= -1
         self.rect.topleft = self.pos
 
+
 class Rectangle(Shape):
     """Draw a rectangle on the screen."""
+
     def __init__(self, **kwargs):
         super(Rectangle, self).__init__(**kwargs)
 
     def draw(self):
         pygame.draw.rect(App.screen, self.color, self.rect, self.d)
         Shape.draw(self)
- 
+
 
 class Ellipse(Shape):
-    """Draw an ellipse on the screen."""  
+    """Draw an ellipse on the screen."""
+
     def __init__(self, **kwargs):
         super(Ellipse, self).__init__(**kwargs)
 
@@ -136,7 +140,8 @@ class Ellipse(Shape):
 
 
 class Polygon(Shape):
-    """Draw a polygon on the screen."""  
+    """Draw a polygon on the screen."""
+
     def __init__(self, points=[], **kwargs):
         super(Polygon, self).__init__(**kwargs)
         self.points = points
@@ -147,19 +152,23 @@ class Polygon(Shape):
 
 
 class Arc(Shape):
-    """Draw an arc on the screen."""  
+    """Draw an arc on the screen."""
+
     def __init__(self, start, stop, **kwargs):
         super(Arc, self).__init__(**kwargs)
         self.start = start
         self.stop = stop
 
     def draw(self):
-        pygame.draw.arc(App.screen, self.color, self.rect, self.start, self.stop, self.d)
+        pygame.draw.arc(
+            App.screen, self.color, self.rect, self.start, self.stop, self.d
+        )
         Shape.draw(self)
 
 
 class Line(Shape):
-    """Draw a line on the screen."""  
+    """Draw a line on the screen."""
+
     def __init__(self, start, stop, **kwargs):
         super(Line, self).__init__(**kwargs)
         self.start = start
@@ -172,12 +181,15 @@ class Line(Shape):
 
 class Text(Shape):
     """Draw a line of text on the screen."""
+
     fontcolor = BLACK
     fontsize = 48
     fontname = None
     bgcolor = None
 
-    def __init__(self, str='', size=None, color=None, bgcolor=None, font=None, **kwargs):
+    def __init__(
+        self, str="", size=None, color=None, bgcolor=None, font=None, **kwargs
+    ):
         if size != None:
             Text.fontsize = size
         self.fontsize = Text.fontsize
@@ -193,9 +205,9 @@ class Text(Shape):
         if bgcolor != None:
             Text.bgcolor = bgcolor
         self.bgcolor = Text.bgcolor
-        
+
         self.str = str
-        self.render()     
+        self.render()
 
         super(Text, self).__init__(size=self.rect.size, **kwargs)
 
@@ -223,7 +235,8 @@ class Text(Shape):
 
 class ListLabel(Text):
     """Draw a label with an item chosen from a list.
-    Display 'Label = item'. """
+    Display 'Label = item'."""
+
     def __init__(self, label, items, index=0, **kwargs):
         if isinstance(items, dict):
             self.keys = list(items.keys())
@@ -236,7 +249,7 @@ class ListLabel(Text):
         self.key = self.keys[index]
         self.label = label
         super(ListLabel, self).__init__(label + self.key, **kwargs)
-    
+
     def next(self):
         """Increment cyclically to the next item."""
         self.index += 1
@@ -249,11 +262,12 @@ class ListLabel(Text):
 
 
 class Button(Shape):
-    """Draw Button on the screen.""" 
+    """Draw Button on the screen."""
+
     size = [120, 40]
     color = WHITE
     d = 3
-     
+
     def __init__(self, msg, cmd, size=None, color=None, d=None, **kwargs):
         super(Button, self).__init__(**kwargs)
         self.msg = msg
@@ -272,7 +286,7 @@ class Button(Shape):
         if d != None:
             Button.d = d
         self.d = Button.d
-        
+
         self.font = pygame.font.Font(None, self.size[1])
         self.text = self.font.render(self.msg, True, BLACK)
         self.text_rect = self.text.get_rect()
@@ -294,9 +308,10 @@ class Board(Shape):
     dx, dy  size of cell
     x0, y0  origin of first cell
     """
+
     size = 50, 50
     dim = 4, 4
-    
+
     def __init__(self, n=4, m=4, dx=50, dy=50, pos=None, **kwargs):
         self.size = (m * dx, n * dy)
         super(Board, self).__init__(pos=pos, size=self.size, **kwargs)
@@ -307,20 +322,20 @@ class Board(Shape):
         self.dx = dx
         self.dy = dy
         self.x0, self.y0 = self.pos
-        self.sel = set()    # set of selected cells
+        self.sel = set()  # set of selected cells
         self.rect = Rect(self.pos, self.size)
         self.wrap = False
         self.T = np.zeros((n, m), int)
         self.colors = np.zeros((n, m), int)
         self.color_list = [None]
-        
+
     def draw_lines(self):
         x0, y0 = self.pos
         x1, y1 = self.get_pos((self.n, self.m))
-        for i in range(self.n+1):
+        for i in range(self.n + 1):
             y = y0 + i * self.dy
             pygame.draw.line(App.screen, BLACK, (x0, y), (x1, y))
-        for j in range(self.m+1):
+        for j in range(self.m + 1):
             x = x0 + j * self.dx
             pygame.draw.line(App.screen, BLACK, (x, y0), (x, y1))
 
@@ -332,13 +347,13 @@ class Board(Shape):
                 x, y = self.get_pos((i, j))
                 text = font.render(str(self.T[i, j]), True, BLACK)
                 text_rect = text.get_rect()
-                text_rect.center = x + self.dx//2, y + self.dy//2
+                text_rect.center = x + self.dx // 2, y + self.dy // 2
                 color = self.color_list[self.colors[i, j]]
                 rect = self.get_rect((i, j))
                 if color != None:
                     pygame.draw.rect(App.screen, color, rect)
                 App.screen.blit(text, text_rect)
-        
+
     def draw(self):
         self.draw_cells()
         self.draw_lines()
@@ -377,13 +392,17 @@ class Board(Shape):
             pass
         else:
             self.sel = set([(i, j)])
-        
 
     def on_key(self, event):
         """Move the current cell if there is only one."""
         if len(self.sel) == 1:
-             d = {K_LEFT:(0, -1), K_RIGHT:(0, 1), K_UP:(-1, 0), K_DOWN:(1, 0), }
-             if event.key in d:
+            d = {
+                K_LEFT: (0, -1),
+                K_RIGHT: (0, 1),
+                K_UP: (-1, 0),
+                K_DOWN: (1, 0),
+            }
+            if event.key in d:
                 i, j = list(self.sel)[0]
                 di, dj = d[event.key]
                 i += di
@@ -392,16 +411,16 @@ class Board(Shape):
                     i %= self.n
                     j %= self.m
                 else:
-                    i = 0 if i < 0 else self.n-1 if i >= self.n else i
-                    j = 0 if j < 0 else self.m-1 if j >= self.m else j
+                    i = 0 if i < 0 else self.n - 1 if i >= self.n else i
+                    j = 0 if j < 0 else self.m - 1 if j >= self.m else j
                 self.sel = {(i, j)}
 
 
-class App():
+class App:
     """Define the main application object and its methods."""
 
-    objects = []   # objects to display
-    selection = [] # current selection
+    objects = []  # objects to display
+    selection = []  # current selection
 
     def __init__(self):
         """Initialize pygame and set up the display screen."""
@@ -414,15 +433,16 @@ class App():
         self.key = None
         self.mod = None
         self.current_obj = None
-        self.shortcuts = {  K_ESCAPE:'App.running=False', 
-                            K_p:'self.capture()',
-                            K_w:'self.where()'
+        self.shortcuts = {
+            K_ESCAPE: "App.running=False",
+            K_p: "self.capture()",
+            K_w: "self.where()",
         }
         App.running = True
-    
+
     def run(self):
         """Run the main event loop.
-        Handle the QUIT event and call ``on_event``. """
+        Handle the QUIT event and call ``on_event``."""
         while App.running:
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -450,7 +470,7 @@ class App():
             self.draw()
 
         pygame.quit()
-        
+
     def on_event(self, event):
         """Implement a general-purpose event handler."""
         pass
@@ -466,15 +486,15 @@ class App():
         for object in App.objects:
             object.draw()
         pygame.display.flip()
-    
+
     def capture(self):
-        """Save a screen capture to the directory of the 
+        """Save a screen capture to the directory of the
         calling class, under the class name in PNG format."""
         name = type(self).__name__
-        module = sys.modules['__main__']
+        module = sys.modules["__main__"]
         path, name = os.path.split(module.__file__)
         name, ext = os.path.splitext(name)
-        filename = path + '/' + name + '.png'
+        filename = path + "/" + name + ".png"
         pygame.image.save(App.screen, filename)
 
     def find_objects(self, pos):
@@ -495,24 +515,25 @@ class App():
 
     def do_shortcuts(self, event):
         """Check if the key/mod combination is part of the shortcuts
-        dictionary and execute it. More shortcuts can be added 
+        dictionary and execute it. More shortcuts can be added
         to the ``self.shortcuts`` dictionary by the program."""
         k = event.key
         m = event.mod
 
-        if k in self.shortcuts and m == 0 :
+        if k in self.shortcuts and m == 0:
             exec(self.shortcuts[k])
         elif (k, m) in self.shortcuts:
             exec(self.shortcuts[k, m])
 
     def where(self):
         """Print the current module and path."""
-        module = sys.modules['__main__']
+        module = sys.modules["__main__"]
         path, name = os.path.split(module.__file__)
         name, ext = os.path.splitext(name)
-        print('path =', path)
-        print('name =', name)
-        print('ext =', ext)
+        print("path =", path)
+        print("name =", name)
+        print("ext =", ext)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     App().run()

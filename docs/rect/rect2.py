@@ -1,7 +1,16 @@
 from rect import *
 
-pts = ('topleft', 'topright', 'bottomleft', 'bottomright',
-        'midtop', 'midright', 'midbottom', 'midleft', 'center')
+pts = (
+    "topleft",
+    "topright",
+    "bottomleft",
+    "bottomright",
+    "midtop",
+    "midright",
+    "midbottom",
+    "midleft",
+    "center",
+)
 
 running = True
 while running:
@@ -12,7 +21,7 @@ while running:
     screen.fill(GRAY)
     pygame.draw.rect(screen, GREEN, rect, 4)
     for pt in pts:
-        pos = eval('rect.'+pt)
+        pos = eval("rect." + pt)
         draw_text(pt, pos)
         pygame.draw.circle(screen, RED, pos, 3)
 

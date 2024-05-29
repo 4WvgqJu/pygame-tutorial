@@ -6,7 +6,7 @@ path = os.path.abspath(__file__)
 dir = os.path.dirname(path)
 print(dir)
 
-files = os.listdir(dir + '/sounds')
+files = os.listdir(dir + "/sounds")
 
 
 RED = 255, 0, 0
@@ -15,13 +15,14 @@ BLUE = 0, 0, 255
 YELLOW = 255, 255, 0
 WHITE = 255, 255, 255
 
+
 class Sounds:
     def __init__(self):
         path = os.path.abspath(__file__)
-        dir = os.path.dirname(path) + '/sounds/'
-        self.click = pygame.mixer.Sound(dir + 'click.wav')
-        self.load = pygame.mixer.Sound(dir + 'load.wav')
-        self.positive = pygame.mixer.Sound(dir + 'positive.wav')
+        dir = os.path.dirname(path) + "/sounds/"
+        self.click = pygame.mixer.Sound(dir + "click.wav")
+        self.load = pygame.mixer.Sound(dir + "load.wav")
+        self.positive = pygame.mixer.Sound(dir + "positive.wav")
 
 
 class Text:
@@ -38,6 +39,7 @@ class Text:
     def draw(self):
         Game.screen.blit(self.image, self.pos)
 
+
 class Game:
     W = 640
     H = 480
@@ -45,10 +47,10 @@ class Game:
     def __init__(self):
         pygame.init()
         Game.screen = pygame.display.set_mode([Game.W, Game.H])
-        pygame.display.set_caption('Pygame Demo')
+        pygame.display.set_caption("Pygame Demo")
         self.running = True
         self.group = pygame.sprite.Group
-        self.txt = Text('pygame')
+        self.txt = Text("pygame")
         self.sounds = Sounds()
 
     def run(self):
@@ -60,24 +62,22 @@ class Game:
                     print(event)
                     if event.key == K_d:
                         self.debugging = not self.debugging
-                        print(f'debug: {self.debugging}')
+                        print(f"debug: {self.debugging}")
 
                     elif event.key == K_l:
                         self.sounds.load.play()
 
                     elif event.key == K_t:
-                        #print('resolution:', pygame.TIMER_RESOLUTION)
-                        print('ticks:', pygame.time.get_ticks())
+                        # print('resolution:', pygame.TIMER_RESOLUTION)
+                        print("ticks:", pygame.time.get_ticks())
 
                 elif event.type == MOUSEBUTTONDOWN:
                     self.sounds.click.play()
-
 
             Game.screen.fill(BLUE)
             self.txt.draw()
             pygame.display.flip()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     Game().run()
-

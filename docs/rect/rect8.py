@@ -18,7 +18,7 @@ while running:
         v[1] *= -1
     if rect.bottom > height:
         v[1] *= -1
-   
+
     screen.fill(GRAY)
     pygame.draw.rect(screen, RED, rect)
     pygame.display.flip()

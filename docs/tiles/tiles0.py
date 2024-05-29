@@ -1,6 +1,6 @@
 import pygame
 
-file = 'tmw_desert_spacing.png'
+file = "tmw_desert_spacing.png"
 image = pygame.image.load(file)
 rect = image.get_rect()
 print(image)
@@ -12,6 +12,6 @@ screen.blit(image, rect)
 pygame.display.update()
 
 while True:
-   for event in pygame.event.get():
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()

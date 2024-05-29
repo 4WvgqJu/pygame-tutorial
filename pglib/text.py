@@ -1,6 +1,7 @@
 class Text:
     pass
 
+
 class Multitext:
     def __init__(self, text):
         self.text = text
@@ -11,9 +12,9 @@ class Multitext:
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-    text = 'this is a \nMULTI-LINE text.' 
-    
+    text = "this is a \nMULTI-LINE text."
+
     a = text.split()
     print(a)

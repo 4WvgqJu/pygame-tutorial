@@ -16,7 +16,7 @@ while running:
 
         elif event.type == MOUSEMOTION and moving:
             rect.move_ip(event.rel)
-    
+
     screen.fill(GRAY)
     pygame.draw.rect(screen, RED, rect)
     if moving:

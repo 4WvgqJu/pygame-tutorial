@@ -7,17 +7,17 @@ while running:
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
-        
+
         if event.type == KEYDOWN:
             if event.key == K_r:
                 rects = random_rects(n)
-   
+
     screen.fill(GRAY)
 
     intersecting = []
-    for i in range(n-1):
+    for i in range(n - 1):
         r0 = rects[i]
-        for j in range(i+1, n):
+        for j in range(i + 1, n):
             r1 = rects[j]
             if r0.colliderect(r1):
                 intersecting.append(r0)
@@ -28,7 +28,7 @@ while running:
         color = RED if r in intersecting else BLUE
         pygame.draw.rect(screen, color, r)
         draw_text(str(i), r.topleft)
-    
+
     pygame.display.flip()
 
 pygame.quit()

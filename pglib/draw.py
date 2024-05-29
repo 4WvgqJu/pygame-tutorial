@@ -1,6 +1,7 @@
 import pygame
 from .app import *
 
+
 class Text(Node):
     """Create a text object which knows how to draw itself."""
 
@@ -10,7 +11,7 @@ class Text(Node):
 
         self.str = text
         self.fontsize = 72
-        self.fontcolor = Color('black')
+        self.fontcolor = Color("black")
         self.render()
 
         # Append the node to the current window
@@ -23,7 +24,7 @@ class Text(Node):
         self.rect = self.text.get_rect()
         self.rect.topleft = self.pos
         self.size = self.rect.size
-        Node.options['size'] = self.size
+        Node.options["size"] = self.size
 
     def draw(self):
         """Draw the text surface on the screen."""
@@ -55,6 +56,3 @@ class Ellipse(Node):
 
 class Button:
     pass
-
-
-

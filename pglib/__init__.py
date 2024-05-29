@@ -3,4 +3,4 @@
 # from .gui import *
 # from .platformer import *
 
-__all__ = ['app', 'draw', 'gui', 'platformer']
+__all__ = ["app", "draw", "gui", "platformer"]

@@ -14,7 +14,7 @@ while running:
 
     clip = r0.clip(r1)
     union = r0.union(r1)
-    
+
     screen.fill(GRAY)
     pygame.draw.rect(screen, YELLOW, union, 0)
     pygame.draw.rect(screen, GREEN, clip, 0)

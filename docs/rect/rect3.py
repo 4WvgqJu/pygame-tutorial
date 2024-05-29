@@ -11,14 +11,14 @@ while running:
             if event.key == K_l:
                 rect.left = 0
             if event.key == K_c:
-                rect.centerx = width//2
+                rect.centerx = width // 2
             if event.key == K_r:
                 rect.right = width
 
             if event.key == K_t:
                 rect.top = 0
             if event.key == K_m:
-                rect.centery = height//2
+                rect.centery = height // 2
             if event.key == K_b:
                 rect.bottom = height
 

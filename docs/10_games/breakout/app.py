@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import *
 import numpy as np
 
+
 class Sprite:
     def __init__(self, file=None, pos=(0, 0), size=None):
         self.parent = None
@@ -14,7 +15,7 @@ class Sprite:
         self.angle = 0
         self.angular_velocity = 0
 
-        self.color = 'red'
+        self.color = "red"
         self.speed = [0, 0]
         if file:
             self.image = pygame.image.load(file)
@@ -29,7 +30,7 @@ class Sprite:
     def set_pos(self, pos):
         self.position = np.array(pos, dtype=float)
         self.rect.center = pos
- 
+
     def set_angle(self, angle):
         self.angle = angle
         self.image = pygame.transform.rotate(self.image0, self.angle)
@@ -50,7 +51,7 @@ class Sprite:
             self.rect.size = self.image.get_size()
 
         self.rect.center = self.position
-    
+
     def draw(self, surf):
         surf.blit(self.image, self.rect)
 
@@ -62,7 +63,7 @@ class Sprite:
 
 
 class App:
-    def __init__(self, file=None, caption='Pygame'):
+    def __init__(self, file=None, caption="Pygame"):
         pygame.init()
         pygame.display.set_caption(caption)
         self.flags = RESIZABLE
@@ -71,7 +72,7 @@ class App:
         self.running = True
         self.updating = True
         self.objects = []
-        self.bg_color = 'gray'
+        self.bg_color = "gray"
         if file:
             self.load_image(file)
         else:
@@ -125,15 +126,16 @@ class App:
         for obj in self.objects:
             obj.draw(self.screen)
         pygame.display.update()
-        
-if __name__ == '__main__':
-    app = App('space.png', 'Asteroids')
 
-    ship = Sprite('spaceship.png', size=(100, 50), pos=(300, 200))
+
+if __name__ == "__main__":
+    app = App("space.png", "Asteroids")
+
+    ship = Sprite("spaceship.png", size=(100, 50), pos=(300, 200))
     app.add(ship)
-    app.add(Sprite('asteroid.png', size=(100, 100), pos=(100, 300)))
-    app.add(Sprite('asteroid.png', size=(150, 150), pos=(400, 100)))
-    
-    app.add_cmd(K_a, 'print(123)')
+    app.add(Sprite("asteroid.png", size=(100, 100), pos=(100, 300)))
+    app.add(Sprite("asteroid.png", size=(150, 150), pos=(400, 100)))
+
+    app.add_cmd(K_a, "print(123)")
     app.add_cmd(K_b, "self.load_image('space.png')")
     app.run()

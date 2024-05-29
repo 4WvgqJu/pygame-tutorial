@@ -4,6 +4,7 @@ import pygame
 from pygame.locals import *
 from pygamelib import *
 
+
 class Ball:
     def __init__(self, pos, field, pad):
         self.pos = pos
@@ -32,6 +33,7 @@ class Ball:
     def draw(self):
         pygame.draw.rect(App.screen, self.color, self.rect, 0)
 
+
 class Pad:
     def __init__(self, keys, field):
         self.keys = keys
@@ -51,7 +53,6 @@ class Pad:
 
         elif event.type == KEYUP:
             self.speed[1] = 0
-                
 
     def update(self):
         self.rect.move_ip(self.speed)
@@ -64,6 +65,7 @@ class Pad:
     def draw(self):
         pygame.draw.rect(App.screen, self.color, self.rect, 0)
 
+
 class Field:
     def __init__(self, rect):
         self.color = WHITE
@@ -75,17 +77,18 @@ class Field:
         pygame.draw.rect(App.screen, self.color, self.rect, self.stroke)
         pygame.draw.rect(App.screen, self.bg_color, self.rect, 0)
 
+
 class PongDemo(App):
     """Play the game of Pong."""
+
     def __init__(self):
         super().__init__()
-        Text('Pong', size=48)
+        Text("Pong", size=48)
 
         self.field = Field((200, 10, 400, 200))
         self.pad = Pad((K_UP, K_DOWN), self.field)
         self.ball = Ball(self.field.rect.center, self.field, self.pad)
         self.bg_color = GRAY
- 
 
     def run(self):
         while self.running:
@@ -109,6 +112,7 @@ class PongDemo(App):
         self.ball.draw()
         self.pad.draw()
         pygame.display.flip()
-                
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     PongDemo().run()

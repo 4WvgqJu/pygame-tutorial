@@ -9,9 +9,9 @@ pygame.init()
 screen = pygame.display.set_mode(SIZE)
 
 rect = Rect(50, 60, 200, 80)
-print(f'x={rect.x}, y={rect.y}, w={rect.w}, h={rect.h}')
-print(f'left={rect.left}, top={rect.top}, right={rect.right}, bottom={rect.bottom}')
-print(f'center={rect.center}')
+print(f"x={rect.x}, y={rect.y}, w={rect.w}, h={rect.h}")
+print(f"left={rect.left}, top={rect.top}, right={rect.right}, bottom={rect.bottom}")
+print(f"center={rect.center}")
 
 running = True
 while running:

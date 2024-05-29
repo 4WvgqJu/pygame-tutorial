@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 
+
 class App:
     """Create a single-window app with multiple scenes."""
 
@@ -20,5 +21,6 @@ class App:
                     App.running = False
         pygame.quit()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     App().run()

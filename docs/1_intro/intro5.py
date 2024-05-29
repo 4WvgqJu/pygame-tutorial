@@ -12,8 +12,16 @@ MAGENTA = (255, 0, 255)
 GRAY = (127, 127, 127)
 WHITE = (255, 255, 255)
 
-key_dict = {K_k:BLACK, K_r:RED, K_g:GREEN, K_b:BLUE, 
-    K_y:YELLOW, K_c:CYAN, K_m:MAGENTA, K_w:WHITE}
+key_dict = {
+    K_k: BLACK,
+    K_r: RED,
+    K_g: GREEN,
+    K_b: BLUE,
+    K_y: YELLOW,
+    K_c: CYAN,
+    K_m: MAGENTA,
+    K_w: WHITE,
+}
 
 print(key_dict)
 
@@ -29,8 +37,8 @@ while running:
         if event.type == KEYDOWN:
             if event.key in key_dict:
                 background = key_dict[event.key]
-                
-                caption = 'background color = ' + str(background)
+
+                caption = "background color = " + str(background)
                 pygame.display.set_caption(caption)
 
     screen.fill(background)

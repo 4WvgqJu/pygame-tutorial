@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 
+
 class Text:
     """Create a text object."""
 
@@ -10,7 +11,7 @@ class Text:
 
         self.fontname = None
         self.fontsize = 72
-        self.fontcolor = Color('black')
+        self.fontcolor = Color("black")
         self.set_font()
         self.render()
 
@@ -28,6 +29,7 @@ class Text:
         """Draw the text image to the screen."""
         App.screen.blit(self.img, self.rect)
 
+
 class App:
     """Create a single-window app with multiple scenes."""
 
@@ -36,7 +38,7 @@ class App:
         pygame.init()
         flags = RESIZABLE
         App.screen = pygame.display.set_mode((640, 240), flags)
-        App.t = Text('Pygame App', pos=(20, 20))
+        App.t = Text("Pygame App", pos=(20, 20))
 
         App.running = True
 
@@ -47,11 +49,12 @@ class App:
                 if event.type == QUIT:
                     App.running = False
 
-            App.screen.fill(Color('gray'))
+            App.screen.fill(Color("gray"))
             App.t.draw()
             pygame.display.update()
 
         pygame.quit()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     App().run()

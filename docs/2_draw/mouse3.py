@@ -26,17 +26,17 @@ while running:
             start = event.pos
             size = 0, 0
             drawing = True
-            
+
         elif event.type == MOUSEBUTTONUP:
             end = event.pos
-            size = end[0]-start[0], end[1]-start[1]
+            size = end[0] - start[0], end[1] - start[1]
             rect = pygame.Rect(start, size)
             rect_list.append(rect)
             drawing = False
 
         elif event.type == MOUSEMOTION and drawing:
             end = event.pos
-            size = end[0]-start[0], end[1]-start[1]
+            size = end[0] - start[0], end[1] - start[1]
 
     screen.fill(GRAY)
     for rect in rect_list:
